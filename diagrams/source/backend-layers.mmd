@@ -1,0 +1,28 @@
+flowchart TD
+    Client["Клієнт (Frontend / Mobile)"] -->|HTTP Request| Express["Express Server :4000"]
+    Express --> CORS["CORS Middleware"]
+    CORS --> JSON["JSON Parser"]
+    JSON --> SprintRouter["Sprint Router"]
+    SprintRouter -->|"header: sprint"| S1["Sprint 1 Routes"]
+    SprintRouter -->|"header: sprint"| S2["Sprint 2 Routes"]
+    SprintRouter -->|"header: sprint"| S3["Sprint 3 Routes"]
+    SprintRouter -->|"header: sprint"| S4["Sprint 4 Routes"]
+
+    S1 --> Auth["Auth Middleware (JWT)"]
+    S2 --> Auth
+    S3 --> Auth
+    S4 --> Auth
+
+    Auth --> Validators["Validators"]
+    Validators --> Controllers["Controllers"]
+    Controllers --> Services["Services"]
+    Services --> Models["Sequelize Models"]
+    Models --> DB["SQLite Database"]
+
+    Controllers --> ErrorHandler["Error Handler Middleware"]
+
+    style Client fill:#77D4BD,color:#262B4F
+    style Express fill:#262B4F,color:#fff
+    style SprintRouter fill:#F8D94F,color:#262B4F
+    style DB fill:#6871EE,color:#fff
+    style Auth fill:#DF7E8D,color:#fff

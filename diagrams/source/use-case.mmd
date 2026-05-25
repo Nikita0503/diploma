@@ -1,0 +1,34 @@
+flowchart TD
+    subgraph Student["Студент обирає напрямок"]
+        FE["Frontend"]
+        BE["Backend"]
+        MB["Mobile"]
+    end
+
+    subgraph Actions["Дії на платформі"]
+        A1["Клонує monorepo"]
+        A2["Запускає готові\nкомпоненти"]
+        A3["Читає тікети\nспринту"]
+        A4["Створює свій\nпроєкт"]
+        A5["Реалізує\nзадачі"]
+        A6["Тестує з готовим\nbackend/frontend"]
+        A7["Звертається до\nAI-асистента"]
+        A8["Переглядає\nреференс"]
+    end
+
+    FE --> A1
+    BE --> A1
+    MB --> A1
+    A1 --> A2
+    A2 --> A3
+    A3 --> A4
+    A4 --> A5
+    A5 --> A6
+    A5 --> A7
+    A5 --> A8
+    A6 --> A3
+
+    style FE fill:#3D78F0,color:#fff
+    style BE fill:#262B4F,color:#fff
+    style MB fill:#6871EE,color:#fff
+    style A7 fill:#F8D94F,color:#262B4F

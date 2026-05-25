@@ -1,0 +1,29 @@
+flowchart TD
+    S1["Sprint 1\nАвторизація"]
+    S1_D["Sign Up / Sign In\nJWT токени\nЗахищені маршрути"]
+
+    S2["Sprint 2\nЧитання даних"]
+    S2_D["Список задач\nПрофіль\nОбробка помилок\nСтани завантаження"]
+
+    S3["Sprint 3\nПовний CRUD"]
+    S3_D["Створення задач\nРедагування\nВидалення\nФайли\nПагінація"]
+
+    S4["Sprint 4\nРозширення"]
+    S4_D["Пріоритети\nРедизайн UI\nДодаткові фільтри"]
+
+    S1 --> S1_D
+    S1_D --> S2
+    S2 --> S2_D
+    S2_D --> S3
+    S3 --> S3_D
+    S3_D --> S4
+    S4 --> S4_D
+
+    style S1 fill:#77D4BD,color:#262B4F
+    style S2 fill:#3D78F0,color:#fff
+    style S3 fill:#6871EE,color:#fff
+    style S4 fill:#DF7E8D,color:#fff
+    style S1_D fill:#e8f8f2,color:#262B4F
+    style S2_D fill:#e0ecff,color:#262B4F
+    style S3_D fill:#eae8ff,color:#262B4F
+    style S4_D fill:#fde8eb,color:#262B4F

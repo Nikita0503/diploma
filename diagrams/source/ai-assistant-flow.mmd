@@ -1,0 +1,30 @@
+flowchart TD
+    Student["Студент"]
+    Question["Запитання"]
+    AI["AI-асистент\n(LLM)"]
+
+    subgraph Context["Контекст платформи"]
+        C1["Структура monorepo"]
+        C2["Тікети спринту"]
+        C3["Технологічний стек"]
+        C4["Типові помилки"]
+    end
+
+    subgraph Responses["Типи відповідей"]
+        R1["Пояснення\nконцепції"]
+        R2["Підказка щодо\nпідходу"]
+        R3["Напрямок\nвирішення помилки"]
+        R4["Рекомендація\nнаступної задачі"]
+    end
+
+    Student --> Question
+    Question --> AI
+    AI --> Context
+    Context --> AI
+    AI --> Responses
+    Responses --> Student
+
+    style Student fill:#3D78F0,color:#fff
+    style AI fill:#F8D94F,color:#262B4F
+    style Context fill:#f5f5f5,color:#262B4F
+    style Responses fill:#f5f5f5,color:#262B4F
