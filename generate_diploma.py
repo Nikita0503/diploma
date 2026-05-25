@@ -717,6 +717,13 @@ def write_chapter2(doc):
         add_list_item(doc, item)
 
     add_paragraph(doc, (
+        "Діаграму сценаріїв використання платформи наведено на рис. 2.1."
+    ))
+    if os.path.exists("diagrams/output/use-case.png"):
+        add_image(doc, "diagrams/output/use-case.png", width=Cm(12))
+    add_image_caption(doc, "Рис. 2.1 — Сценарії використання навчальної платформи")
+
+    add_paragraph(doc, (
         "Навчальна модель базується на спринтовій методології. Кожен спринт "
         "додає новий рівень складності та нові концепції:"
     ))
@@ -827,12 +834,12 @@ def write_chapter2(doc):
     ))
 
     add_paragraph(doc, (
-        "Діаграму залежностей між компонентами monorepo наведено на рис. 2.1."
+        "Діаграму залежностей між компонентами monorepo наведено на рис. 2.2."
     ))
     # Image placeholder
     if os.path.exists("diagrams/output/monorepo-structure.png"):
         add_image(doc, "diagrams/output/monorepo-structure.png", width=Cm(13))
-    add_image_caption(doc, "Рис. 2.1 — Структура monorepo та залежності між пакетами")
+    add_image_caption(doc, "Рис. 2.2 — Структура monorepo та залежності між пакетами")
 
     # 2.4
     add_subsection_title(doc, "2.4. Проєктування спільних пакетів")
@@ -927,10 +934,10 @@ def write_chapter2(doc):
         "загальнодоступні задачі."
     ))
 
-    add_paragraph(doc, "ER-діаграму бази даних наведено на рис. 2.2.")
+    add_paragraph(doc, "ER-діаграму бази даних наведено на рис. 2.3.")
     if os.path.exists("diagrams/output/er-model.png"):
         add_image(doc, "diagrams/output/er-model.png", width=Cm(12))
-    add_image_caption(doc, "Рис. 2.2 — ER-модель бази даних")
+    add_image_caption(doc, "Рис. 2.3 — ER-модель бази даних")
 
     # 2.6
     add_subsection_title(doc, "2.6. Проєктування REST API та спринтовий роутинг")
@@ -992,10 +999,10 @@ def write_chapter2(doc):
         "змінюється доступний функціонал API."
     ))
 
-    add_paragraph(doc, "Діаграму компонентів web-додатку наведено на рис. 2.3.")
+    add_paragraph(doc, "Діаграму компонентів web-додатку наведено на рис. 2.4.")
     if os.path.exists("diagrams/output/component-tree.png"):
         add_image(doc, "diagrams/output/component-tree.png", width=Cm(15))
-    add_image_caption(doc, "Рис. 2.3 — Дерево компонентів web-додатку")
+    add_image_caption(doc, "Рис. 2.4 — Дерево компонентів web-додатку")
 
     # 2.8
     add_subsection_title(doc, "2.8. Проєктування mobile-додатку")
@@ -1022,10 +1029,10 @@ def write_chapter2(doc):
         "написана один раз і використовується на обох платформах."
     ))
 
-    add_paragraph(doc, "Діаграму навігації mobile-додатку наведено на рис. 2.4.")
+    add_paragraph(doc, "Діаграму навігації mobile-додатку наведено на рис. 2.5.")
     if os.path.exists("diagrams/output/navigation-flow.png"):
         add_image(doc, "diagrams/output/navigation-flow.png", width=Cm(13))
-    add_image_caption(doc, "Рис. 2.4 — Навігаційний потік додатку")
+    add_image_caption(doc, "Рис. 2.5 — Навігаційний потік додатку")
 
     # 2.9
     add_subsection_title(doc, "2.9. Система навчальних завдань (тікети та спринти)")
@@ -1048,6 +1055,13 @@ def write_chapter2(doc):
         "для Mobile — 27. Кожен набір охоплює повний цикл розробки "
         "task manager додатку від авторизації до розширеного функціоналу."
     ))
+
+    add_paragraph(doc, (
+        "Діаграму спринтової прогресії наведено на рис. 2.6."
+    ))
+    if os.path.exists("diagrams/output/sprint-progression.png"):
+        add_image(doc, "diagrams/output/sprint-progression.png", width=Cm(4.5))
+    add_image_caption(doc, "Рис. 2.6 — Спринтова прогресія навчальних завдань")
 
     add_paragraph(doc, (
         "Формат тікетів обрано свідомо — він відповідає реальним практикам "
@@ -1082,6 +1096,13 @@ def write_chapter2(doc):
         "але не генерує готовий код для копіювання. Це забезпечує "
         "активне навчання та розвиток самостійності студента."
     ))
+
+    add_paragraph(doc, (
+        "Діаграму взаємодії студента з AI-асистентом наведено на рис. 2.7."
+    ))
+    if os.path.exists("diagrams/output/ai-assistant-flow.png"):
+        add_image(doc, "diagrams/output/ai-assistant-flow.png", width=Cm(13))
+    add_image_caption(doc, "Рис. 2.7 — Схема взаємодії студента з AI-асистентом")
 
     # 2.11
     add_subsection_title(doc, "2.11. Висновки за розділом")
@@ -1151,6 +1172,13 @@ def write_chapter3(doc):
         "Валідація вхідних даних виконується через express-validator "
         "з кастомними правилами для кожного ендпоінту."
     ))
+
+    add_paragraph(doc, (
+        "Архітектуру серверного додатку наведено на рис. 3.1."
+    ))
+    if os.path.exists("diagrams/output/backend-layers.png"):
+        add_image(doc, "diagrams/output/backend-layers.png", width=Cm(12))
+    add_image_caption(doc, "Рис. 3.1 — Архітектура серверного додатку")
 
     # 3.2
     add_subsection_title(doc, "3.2. Реалізація спільних пакетів")
@@ -1232,10 +1260,10 @@ def write_chapter3(doc):
         "пріоритету), TaskStatus (статус задачі)."
     ))
 
-    add_paragraph(doc, "Діаграму потоків даних у web-додатку наведено на рис. 3.1.")
+    add_paragraph(doc, "Діаграму потоків даних у web-додатку наведено на рис. 3.2.")
     if os.path.exists("diagrams/output/data-flow.png"):
         add_image(doc, "diagrams/output/data-flow.png", width=Cm(6))
-    add_image_caption(doc, "Рис. 3.1 — Потік даних у додатку")
+    add_image_caption(doc, "Рис. 3.2 — Потік даних у додатку")
 
     # 3.4
     add_subsection_title(doc, "3.4. Реалізація mobile-додатку")
