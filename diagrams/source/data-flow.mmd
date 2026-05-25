@@ -1,0 +1,13 @@
+flowchart TD
+    Backend["Backend :4000\nExpress + SQLite"] -->|HTTP| API["API Package\nAxios"]
+    API -->|async thunks| Store["Redux Store\nauth / tasks / user / commonTasks"]
+    Store -->|useSelector\nuseDispatch| Hooks["Hooks\nuseAuth / useTasks / useCurrentUser"]
+    Hooks --> Containers["Containers\nlogic + state"]
+    Containers -->|props| Pages["Pages\npure UI"]
+
+    style Backend fill:#262B4F,color:#fff
+    style API fill:#DF7E8D,color:#fff
+    style Store fill:#6871EE,color:#fff
+    style Hooks fill:#3D78F0,color:#fff
+    style Containers fill:#F8D94F,color:#262B4F
+    style Pages fill:#77D4BD,color:#262B4F

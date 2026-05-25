@@ -1,0 +1,20 @@
+flowchart TD
+    Start(["Open App"]) --> Auth{"Token?"}
+    Auth -->|No| SignIn["/sign-in"]
+    Auth -->|Yes| Sprint{"Sprint?"}
+    SignIn <-->|toggle| SignUp["/sign-up"]
+    SignIn -->|login| Sprint
+    SignUp -->|register| Sprint
+    Sprint -->|"1"| Stub["Stub"]
+    Sprint -->|"2+"| Tasks["/tasks"]
+    Tasks --> Profile["/profile"]
+    Tasks --> CommonTasks["/common-tasks"]
+    Tasks --> Details["/tasks/:id"]
+    Tasks --> Add["/tasks/new"]
+    Details --> Edit["/tasks/:id/edit"]
+    Profile -->|logout| SignIn
+
+    style SignIn fill:#6871EE,color:#fff
+    style SignUp fill:#6871EE,color:#fff
+    style Tasks fill:#F8D94F,color:#262B4F
+    style Stub fill:#f0f0f0,color:#5E6178

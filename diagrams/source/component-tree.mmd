@@ -1,0 +1,25 @@
+graph TD
+    App --> Provider["Redux Provider"]
+    Provider --> DevMenuProvider
+    DevMenuProvider --> Router["AppRouter"]
+
+    Router --> GuestRoute
+    Router --> ProtectedRoute
+
+    GuestRoute --> AuthLayout
+    AuthLayout --> SignIn["SignIn"]
+    AuthLayout --> SignUp["SignUp"]
+
+    ProtectedRoute --> AppLayout
+    AppLayout --> Tasks
+    AppLayout --> Profile
+    AppLayout --> CommonTasks
+    AppLayout --> TaskDetails
+    AppLayout --> AddTask
+    AppLayout --> EditTask
+
+    style App fill:#6871EE,color:#fff
+    style AuthLayout fill:#6871EE,color:#fff
+    style AppLayout fill:#F8D94F,color:#262B4F
+    style GuestRoute fill:#77D4BD,color:#262B4F
+    style ProtectedRoute fill:#DF7E8D,color:#fff

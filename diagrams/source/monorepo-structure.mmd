@@ -1,0 +1,37 @@
+graph LR
+    subgraph Apps["apps"]
+        FE["frontend-app"]
+        MB["mobile-app"]
+        BE["backend-app"]
+    end
+
+    subgraph Packages["packages"]
+        TYPES["types"]
+        CONST["constants"]
+        API["api"]
+        STORE["store"]
+        HOOKS["hooks"]
+    end
+
+    FE --> HOOKS
+    FE --> STORE
+    MB --> HOOKS
+    MB --> STORE
+    HOOKS --> STORE
+    HOOKS --> API
+    STORE --> API
+    STORE --> CONST
+    API --> TYPES
+    STORE --> TYPES
+
+    FE -.->|HTTP| BE
+    MB -.->|HTTP| BE
+
+    style FE fill:#3D78F0,color:#fff
+    style MB fill:#6871EE,color:#fff
+    style BE fill:#262B4F,color:#fff
+    style TYPES fill:#77D4BD,color:#262B4F
+    style CONST fill:#77D4BD,color:#262B4F
+    style API fill:#DF7E8D,color:#fff
+    style STORE fill:#F8D94F,color:#262B4F
+    style HOOKS fill:#F8D94F,color:#262B4F

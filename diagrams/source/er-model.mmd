@@ -1,0 +1,31 @@
+erDiagram
+    USER {
+        int id PK
+        string email UK
+        string name
+        string password
+        string avatar
+    }
+
+    TASK {
+        int id PK
+        string title
+        string description
+        boolean done
+        string priority
+        int userId FK
+    }
+
+    FILE {
+        int id PK
+        string image
+        int taskId FK
+    }
+
+    COMMON_TASK {
+        int id PK
+        string title
+    }
+
+    USER ||--o{ TASK : "creates"
+    TASK ||--o{ FILE : "has"
