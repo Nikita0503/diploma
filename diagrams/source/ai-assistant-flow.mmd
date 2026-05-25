@@ -1,30 +1,31 @@
 flowchart TD
-    Student["Студент"]
-    Question["Запитання"]
-    AI["AI-асистент\n(LLM)"]
+    S["Студент застряг\nна задачі"]
+    S --> Q{"Тип проблеми?"}
 
-    subgraph Context["Контекст платформи"]
-        C1["Структура monorepo"]
-        C2["Тікети спринту"]
-        C3["Технологічний стек"]
-        C4["Типові помилки"]
-    end
+    Q -->|"Не розумію\nконцепцію"| A1["Запит: Що таке JWT?"]
+    Q -->|"Не знаю як\nреалізувати"| A2["Запит: Як зробити\nзахищений маршрут?"]
+    Q -->|"Отримую\nпомилку"| A3["Запит: Чому 401\nпри запиті?"]
+    Q -->|"Не знаю що\nробити далі"| A4["Запит: Який\nнаступний крок?"]
 
-    subgraph Responses["Типи відповідей"]
-        R1["Пояснення\nконцепції"]
-        R2["Підказка щодо\nпідходу"]
-        R3["Напрямок\nвирішення помилки"]
-        R4["Рекомендація\nнаступної задачі"]
-    end
+    A1 --> AI["AI-асистент"]
+    A2 --> AI
+    A3 --> AI
+    A4 --> AI
 
-    Student --> Question
-    Question --> AI
-    AI --> Context
-    Context --> AI
-    AI --> Responses
-    Responses --> Student
+    AI --> CTX["Аналізує контекст:\n• тікети спринту\n• стек проєкту\n• архітектуру"]
 
-    style Student fill:#3D78F0,color:#fff
+    CTX --> R1["Пояснює концепцію\nбез готового коду"]
+    CTX --> R2["Дає підказку\nпро підхід"]
+    CTX --> R3["Пояснює причину\nта напрямок"]
+    CTX --> R4["Рекомендує\nнаступний тікет"]
+
+    R1 --> Done["Студент продовжує\nсамостійну роботу"]
+    R2 --> Done
+    R3 --> Done
+    R4 --> Done
+
+    style S fill:#3D78F0,color:#fff
     style AI fill:#F8D94F,color:#262B4F
-    style Context fill:#f5f5f5,color:#262B4F
-    style Responses fill:#f5f5f5,color:#262B4F
+    style CTX fill:#262B4F,color:#fff
+    style Done fill:#77D4BD,color:#262B4F
+    style Q fill:#fff,color:#262B4F
