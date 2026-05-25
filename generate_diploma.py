@@ -1001,7 +1001,7 @@ def write_chapter2(doc):
 
     add_paragraph(doc, "Діаграму компонентів web-додатку наведено на рис. 2.4.")
     if os.path.exists("diagrams/output/component-tree.png"):
-        add_image(doc, "diagrams/output/component-tree.png", width=Cm(15))
+        add_image(doc, "diagrams/output/component-tree.png", width=Cm(17))
     add_image_caption(doc, "Рис. 2.4 — Дерево компонентів web-додатку")
 
     # 2.8
