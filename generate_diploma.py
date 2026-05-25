@@ -831,7 +831,7 @@ def write_chapter2(doc):
     ))
     # Image placeholder
     if os.path.exists("diagrams/output/monorepo-structure.png"):
-        add_image(doc, "diagrams/output/monorepo-structure.png")
+        add_image(doc, "diagrams/output/monorepo-structure.png", width=Cm(13))
     add_image_caption(doc, "Рис. 2.1 — Структура monorepo та залежності між пакетами")
 
     # 2.4
@@ -929,7 +929,7 @@ def write_chapter2(doc):
 
     add_paragraph(doc, "ER-діаграму бази даних наведено на рис. 2.2.")
     if os.path.exists("diagrams/output/er-model.png"):
-        add_image(doc, "diagrams/output/er-model.png")
+        add_image(doc, "diagrams/output/er-model.png", width=Cm(12))
     add_image_caption(doc, "Рис. 2.2 — ER-модель бази даних")
 
     # 2.6
@@ -994,7 +994,7 @@ def write_chapter2(doc):
 
     add_paragraph(doc, "Діаграму компонентів web-додатку наведено на рис. 2.3.")
     if os.path.exists("diagrams/output/component-tree.png"):
-        add_image(doc, "diagrams/output/component-tree.png")
+        add_image(doc, "diagrams/output/component-tree.png", width=Cm(15))
     add_image_caption(doc, "Рис. 2.3 — Дерево компонентів web-додатку")
 
     # 2.8
@@ -1024,7 +1024,7 @@ def write_chapter2(doc):
 
     add_paragraph(doc, "Діаграму навігації mobile-додатку наведено на рис. 2.4.")
     if os.path.exists("diagrams/output/navigation-flow.png"):
-        add_image(doc, "diagrams/output/navigation-flow.png")
+        add_image(doc, "diagrams/output/navigation-flow.png", width=Cm(13))
     add_image_caption(doc, "Рис. 2.4 — Навігаційний потік додатку")
 
     # 2.9
@@ -1234,7 +1234,7 @@ def write_chapter3(doc):
 
     add_paragraph(doc, "Діаграму потоків даних у web-додатку наведено на рис. 3.1.")
     if os.path.exists("diagrams/output/data-flow.png"):
-        add_image(doc, "diagrams/output/data-flow.png")
+        add_image(doc, "diagrams/output/data-flow.png", width=Cm(6))
     add_image_caption(doc, "Рис. 3.1 — Потік даних у додатку")
 
     # 3.4
