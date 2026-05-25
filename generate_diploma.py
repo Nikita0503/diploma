@@ -179,6 +179,20 @@ def add_image_caption(doc, text):
     return para
 
 
+def add_code_block(doc, code, language=""):
+    """Add a code block with monospace font."""
+    para = doc.add_paragraph()
+    para.paragraph_format.first_line_indent = Cm(0)
+    para.paragraph_format.space_before = Pt(6)
+    para.paragraph_format.space_after = Pt(6)
+    para.paragraph_format.line_spacing = 1.0
+    for line in code.split("\n"):
+        run = para.add_run(line + "\n")
+        run.font.name = "Courier New"
+        run.font.size = Pt(9)
+    return para
+
+
 # ============================================================
 # CONTENT SECTIONS
 # ============================================================
@@ -499,17 +513,49 @@ def write_chapter1(doc):
     add_paragraph(doc, (
         "Codecademy — інтерактивна платформа з покроковими уроками. "
         "Забезпечує швидкий старт та миттєвий зворотний зв'язок. "
+        "Платформа пропонує курси з HTML, CSS, JavaScript, Python, "
+        "React та інших технологій. Інтерактивний редактор коду "
+        "дозволяє виконувати завдання безпосередньо у браузері з "
+        "автоматичною перевіркою результатів. Codecademy також "
+        "пропонує Pro-версію з проєктами та сертифікатами. "
         "Обмеження: завдання виконуються у браузерному середовищі, "
-        "що не відповідає реальним умовам розробки. Відсутній досвід "
-        "роботи з повноцінним проєктом, системою збірки та залежностями."
+        "що не відповідає реальним умовам розробки. Студент не "
+        "працює з терміналом, системою контролю версій, менеджером "
+        "пакетів чи конфігурацією збірки. Відсутній досвід роботи "
+        "з повноцінним проєктом та командною розробкою."
     ))
 
     add_paragraph(doc, (
-        "Udemy, Coursera — платформи з відеокурсами. Надають теоретичну "
-        "базу та демонстрацію процесу розробки. Обмеження: пасивне "
-        "навчання (перегляд відео), відсутність інтерактивності, "
-        "проєкти курсу часто застарівають, немає адаптації під рівень "
-        "студента."
+        "Udemy, Coursera — платформи з відеокурсами від індивідуальних "
+        "інструкторів та університетів. Надають теоретичну базу та "
+        "демонстрацію процесу розробки. Курси зазвичай включають "
+        "побудову проєкту від початку до кінця, що дає уявлення про "
+        "повний цикл розробки. Деякі курси на Coursera мають peer "
+        "review та автоматичну перевірку завдань. Обмеження: переважно "
+        "пасивне навчання (перегляд відео), відсутність інтерактивності "
+        "та адаптації під рівень студента. Проєкти курсу часто "
+        "застарівають через швидкий розвиток технологій. Студент "
+        "повторює дії інструктора, а не вирішує задачі самостійно."
+    ))
+
+    add_paragraph(doc, (
+        "Frontend Mentor — платформа з реальними проєктними завданнями "
+        "для frontend-розробників. Надає дизайн-макети та вимоги, "
+        "студент реалізує проєкт самостійно. Перевагою є наближеність "
+        "до реальної роботи та наявність спільноти для code review. "
+        "Обмеження: фокус виключно на frontend, відсутність backend "
+        "частини, немає спринтової моделі та поступового ускладнення "
+        "в рамках одного проєкту."
+    ))
+
+    add_paragraph(doc, (
+        "GitHub Learning Lab — платформа від GitHub для навчання "
+        "через інтерактивні курси безпосередньо у репозиторіях. "
+        "Студент працює з реальними інструментами (Git, GitHub Actions, "
+        "Pull Requests). Перевагою є використання реального робочого "
+        "середовища. Обмеження: курси зосереджені на DevOps та "
+        "workflow, а не на розробці додатків. Відсутній full-stack "
+        "контекст."
     ))
 
     add_paragraph(doc, (
@@ -524,7 +570,7 @@ def write_chapter1(doc):
     ))
 
     # Table 1.1
-    table = doc.add_table(rows=7, cols=5)
+    table = doc.add_table(rows=9, cols=5)
     table.style = "Table Grid"
     headers = ["Платформа", "Реальний проєкт", "Full-stack", "Спринти", "AI-ментор"]
     for i, h in enumerate(headers):
@@ -535,6 +581,8 @@ def write_chapter1(doc):
         ["Codecademy", "Ні", "Частково", "Ні", "Так"],
         ["Udemy/Coursera", "Частково", "Так", "Ні", "Ні"],
         ["Exercism", "Ні", "Ні", "Ні", "Так"],
+        ["Frontend Mentor", "Так", "Ні", "Ні", "Ні"],
+        ["GitHub Learning Lab", "Так", "Ні", "Ні", "Ні"],
         ["Наша платформа", "Так", "Так", "Так", "Так"],
     ]
     for row_idx, row_data in enumerate(data, 1):
@@ -1070,6 +1118,26 @@ def write_chapter2(doc):
         "criteria та сценаріїв тестування."
     ))
 
+    add_paragraph(doc, (
+        "Для прикладу наведемо перелік тікетів Sprint 1 для Frontend-напрямку:"
+    ))
+    sprint1_tickets = [
+        "Sign Up Page Markup — верстка сторінки реєстрації з валідацією форми;",
+        "Sign In Page Markup — верстка сторінки входу з валідацією;",
+        "Sign Up Page Logic — бізнес-логіка реєстрації (API-виклик, обробка відповіді);",
+        "Sign In Page Logic — бізнес-логіка входу (API-виклик, збереження токена);",
+        "Integrate the UI with the registration logic — інтеграція UI з логікою реєстрації;",
+        "Integrate the UI with the login logic — інтеграція UI з логікою входу.",
+    ]
+    for i, ticket in enumerate(sprint1_tickets, 1):
+        add_numbered_item(doc, i, ticket)
+
+    add_paragraph(doc, (
+        "Кожен тікет містить детальні сценарії (від 4 до 8), що описують "
+        "очікувану поведінку для happy path, error handling та edge cases. "
+        "Повний приклад тікету наведено у Додатку В."
+    ))
+
     # 2.10
     add_subsection_title(doc, "2.10. Проєктування AI-асистента навчального процесу")
 
@@ -1179,6 +1247,51 @@ def write_chapter3(doc):
     if os.path.exists("diagrams/output/backend-layers.png"):
         add_image(doc, "diagrams/output/backend-layers.png", width=Cm(12))
     add_image_caption(doc, "Рис. 3.1 — Архітектура серверного додатку")
+
+    add_paragraph(doc, (
+        "Нижче наведено фрагмент коду middleware авторизації, який "
+        "демонструє перевірку JWT-токена:"
+    ))
+    add_code_block(doc, '''const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return next(ApiError.unauthorized());
+    }
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      return next(ApiError.unauthorized());
+    }
+    const decoded = jwt.verify(token, process.env.SECRET_KEY as string);
+    (req as any).user = decoded;
+    next();
+  } catch (e) {
+    next(ApiError.unauthorized());
+  }
+};''')
+
+    add_paragraph(doc, (
+        "Фрагмент коду спринтового роутера, який демонструє механізм "
+        "маршрутизації за заголовком sprint:"
+    ))
+    add_code_block(doc, '''const sprintRouter = (req: Request, res: Response, next: NextFunction) => {
+  const sprint = req.header("sprint");
+  switch (sprint) {
+    case SPRINTS.SPRINT_1:
+      return sprint1Router(req, res, next);
+    case SPRINTS.SPRINT_2:
+      return sprint2Router(req, res, next);
+    case SPRINTS.SPRINT_3:
+      return sprint3Router(req, res, next);
+    case SPRINTS.SPRINT_4:
+      return sprint4Router(req, res, next);
+    default:
+      return sprint4Router(req, res, next);
+  }
+};''')
 
     # 3.2
     add_subsection_title(doc, "3.2. Реалізація спільних пакетів")
@@ -1513,6 +1626,275 @@ def write_references(doc):
         para.add_run(f"{i}. {ref}")
 
 
+def write_appendices(doc):
+    """Write ДОДАТКИ."""
+    add_page_break(doc)
+    add_chapter_title(doc, "ДОДАТОК А")
+    add_centered_paragraph(doc, "Конфігурація Monorepo", bold=True)
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Кореневий package.json:", bold=True)
+    add_code_block(doc, '''{
+  "name": "turbo-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "packageManager": "npm@10.8.2",
+  "overrides": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}''')
+
+    add_paragraph(doc, "Конфігурація Turborepo (turbo.json):", bold=True)
+    add_code_block(doc, '''{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}''')
+
+    add_paragraph(doc, "Моделі бази даних (models.ts):", bold=True)
+    add_code_block(doc, '''const User = sequelize.define<Model<UserAttributes, UserCreationAttributes>>(
+  "user",
+  {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    email: { type: DataTypes.STRING, unique: true, allowNull: false },
+    name: { type: DataTypes.STRING, allowNull: false },
+    password: { type: DataTypes.STRING, allowNull: false },
+    avatar: { type: DataTypes.STRING },
+  }
+);
+
+const Task = sequelize.define<Model<TaskAttributes, TaskCreationAttributes>>(
+  "task",
+  {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.STRING },
+    done: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    priority: { type: DataTypes.ENUM("high", "low"), allowNull: true },
+  }
+);
+
+const File = sequelize.define<Model<FileAttributes, FileCreationAttributes>>(
+  "file",
+  {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    image: { type: DataTypes.STRING, allowNull: false },
+  }
+);
+
+User.hasMany(Task, { onDelete: "CASCADE" });
+Task.belongsTo(User);
+Task.hasMany(File, { onDelete: "CASCADE" });
+File.belongsTo(Task);''')
+
+    # ДОДАТОК Б
+    add_page_break(doc)
+    add_chapter_title(doc, "ДОДАТОК Б")
+    add_centered_paragraph(doc, "Код спільних пакетів", bold=True)
+    add_paragraph(doc, "")
+
+    add_paragraph(doc, "Пакет types — визначення типів (types/src/tasks.ts):", bold=True)
+    add_code_block(doc, '''export type TaskPriority = "low" | "high";
+
+export interface Task {
+  id: string;
+  title: string;
+  description: string;
+  done: boolean;
+  priority?: TaskPriority;
+  files: any[];
+}
+
+export interface CommonTask {
+  id: string;
+  title: string;
+}''')
+
+    add_paragraph(doc, "Пакет types — визначення користувача (types/src/user.ts):", bold=True)
+    add_code_block(doc, '''export interface User {
+  email: string;
+  name: string;
+  avatar: string | null;
+}''')
+
+    add_paragraph(doc, "Пакет api — Axios інстанс з interceptor (api/src/axiosInstance.ts):", bold=True)
+    add_code_block(doc, '''import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import { authTokens } from "./authTokens";
+
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:4000/api",
+});
+
+axiosInstance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig<any>) => {
+    const accessToken = authTokens.accessToken;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error: AxiosError) => {
+    Promise.reject(error);
+  }
+);
+
+export default axiosInstance;''')
+
+    add_paragraph(doc, "Пакет api — функції авторизації (api/src/auth.ts):", bold=True)
+    add_code_block(doc, '''export const loginApi = async (email: string, password: string) => {
+  return axiosInstance.post("/auth/login", { email, password });
+};
+
+export const registrationApi = async (
+  email: string,
+  name: string,
+  password: string,
+  avatar?: any
+) => {
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("name", name);
+  formData.append("password", password);
+  if (avatar) {
+    formData.append("avatar", avatar);
+  }
+  return axiosInstance.post("/auth/registration", formData);
+};''')
+
+    add_paragraph(doc, "Пакет store — Redux actions авторизації (store/src/actions/authActions.ts):", bold=True)
+    add_code_block(doc, '''export const signInAsyncAction = createAsyncThunk<void, ISignInAsyncAction>(
+  "auth/signInAsyncAction",
+  async ({ email, password, onSuccess, onError }, { dispatch }) => {
+    try {
+      dispatch(setLoadingAction({ loading: true }));
+      const res = await loginApi(email.toLowerCase(), password);
+      if (res.data.access_token) {
+        dispatch(setAccessTokenAction({ accessToken: res.data.access_token }));
+        authTokens.accessToken = res.data.access_token;
+      }
+      if (onSuccess) { onSuccess(); }
+    } catch (e: any) {
+      if (onError) { onError(e); }
+    } finally {
+      dispatch(setLoadingAction({ loading: false }));
+    }
+  }
+);''')
+
+    add_paragraph(doc, "Пакет hooks — хук авторизації (hooks/src/auth.ts):", bold=True)
+    add_code_block(doc, '''export const useAuth = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const accessToken = useSelector<RootState, string | undefined>(
+    (state) => state.auth.accessToken
+  );
+  const loading = useSelector<RootState, boolean>(
+    (state) => state.auth.loading
+  );
+
+  const signIn = React.useCallback(
+    (email: string, password: string, onSuccess?, onError?) => {
+      dispatch(actions.auth.signInAsyncAction({
+        email, password, onSuccess, onError
+      }));
+    }, []
+  );
+
+  const signUp = React.useCallback(
+    (email, name, password, repeatPassword, avatar, onSuccess?, onError?) => {
+      dispatch(actions.auth.signUpAsyncAction({
+        email, name, password, repeatPassword, avatar, onSuccess, onError
+      }));
+    }, []
+  );
+
+  const logout = React.useCallback(
+    (onSuccess?, onError?) => {
+      dispatch(actions.auth.logoutAsyncAction({ onSuccess, onError }));
+    }, []
+  );
+
+  return { accessToken, loading, signIn, signUp, logout };
+};''')
+
+    # ДОДАТОК В
+    add_page_break(doc)
+    add_chapter_title(doc, "ДОДАТОК В")
+    add_centered_paragraph(doc, "Приклад навчального тікету", bold=True)
+    add_paragraph(doc, "")
+
+    add_paragraph(doc, "Тікет: Sign Up Page Markup (Frontend, Sprint 1)", bold=True)
+    add_paragraph(doc, "Epic: Authorization")
+    add_paragraph(doc, "Тип: Story")
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Objective:", bold=True)
+    add_paragraph(doc, (
+        "Implement the UI of the registration page in the web app. "
+        "This task includes only the UI layout — no business logic or "
+        "API calls. However the form validation logic must be implemented."
+    ))
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Details:", bold=True)
+    add_paragraph(doc, 'path: "/registration"')
+    add_paragraph(doc, "design: [посилання на Figma-макет]")
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenarios:", bold=True)
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenario 0.1 – Correct navigation", bold=True)
+    add_paragraph(doc, (
+        "The user opens the web application at \"/registration\". "
+        "The registration page with all required fields (according to "
+        "the design) is displayed."
+    ))
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenario 1.1 – Correct field completion (with photo)", bold=True)
+    add_paragraph(doc, (
+        "The user fills in all fields correctly. "
+        "The user selects a photo. "
+        "The user clicks the \"Sign Up\" button. "
+        "Nothing happens (no API call in this task)."
+    ))
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenario 2.1 – Incorrect field completion", bold=True)
+    add_paragraph(doc, (
+        "The user fills in all fields incorrectly. "
+        "The user clicks the \"Sign Up\" button. "
+        "A validation error is displayed under each field, "
+        "according to the design."
+    ))
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenario 3.1 – Photo selection", bold=True)
+    add_paragraph(doc, (
+        "The user clicks on the \"edit\" (pencil) icon. "
+        "A system file selection dialog is displayed. "
+        "The user selects a photo. "
+        "The photo is displayed in the avatar area."
+    ))
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Scenario 4.1 – Navigation to Sign In", bold=True)
+    add_paragraph(doc, (
+        "The user clicks the \"Sign In\" link. "
+        "The user is redirected to the login page."
+    ))
+
+
 # ============================================================
 # MAIN
 # ============================================================
@@ -1568,6 +1950,7 @@ def main():
     write_chapter3(doc)
     write_conclusions(doc)
     write_references(doc)
+    write_appendices(doc)
 
     # Save
     doc.save(OUTPUT_FILE)
