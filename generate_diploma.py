@@ -940,7 +940,8 @@ def write_chapter2(doc):
         "та «dev» (без кешування, з прапорцем persistent для dev-серверів). "
         "Це забезпечує правильний порядок збірки: спочатку збираються "
         "спільні пакети (types → constants → api → store → hooks), потім "
-        "додатки, що від них залежать."
+        "додатки, що від них залежать. Повний код конфігурації monorepo "
+        "(package.json, turbo.json, моделі даних) наведено у Додатку А."
     ))
 
     add_paragraph(doc, (
@@ -1406,6 +1407,11 @@ def write_chapter3(doc):
         "signUp, logout та стан isAuthenticated, isLoading, error. "
         "Це спрощує використання store у компонентах та забезпечує "
         "єдиний інтерфейс для web та mobile."
+    ))
+
+    add_paragraph(doc, (
+        "Повний вихідний код спільних пакетів (типи, API-клієнт, "
+        "Redux actions, хуки) наведено у Додатку Б."
     ))
 
     # 3.3
