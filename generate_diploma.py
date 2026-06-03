@@ -705,12 +705,68 @@ def write_chapter1(doc):
     ))
 
     add_paragraph(doc, (
+        "Порівняння monorepo та polyrepo підходів наведено у таблиці 1.2."
+    ))
+
+    table_mp = doc.add_table(rows=8, cols=3)
+    table_mp.style = "Table Grid"
+    headers_mp = ["Критерій", "Monorepo", "Polyrepo"]
+    for i, h in enumerate(headers_mp):
+        table_mp.rows[0].cells[i].text = h
+    data_mp = [
+        ["Спільний код", "Легко через workspace packages", "Потребує npm publish"],
+        ["Атомарні зміни", "Один коміт на всі пакети", "Кілька PR у різних репо"],
+        ["Єдина збірка", "Turborepo/Nx оркеструє", "Окремі CI/CD pipeline"],
+        ["Рефакторинг", "Глобальний, одразу видно наслідки", "Складний, ризик розсинхронізації"],
+        ["Онбординг", "Один clone — вся система", "Клонувати кілька репозиторіїв"],
+        ["Масштабування", "Може сповільнитись при >100K файлів", "Кожне репо незалежне"],
+        ["Ізоляція", "Менша — зміни впливають на всіх", "Повна — кожне репо окремо"],
+    ]
+    for row_idx, row_data in enumerate(data_mp, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_mp.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця 1.2 — Порівняння Monorepo та Polyrepo підходів")
+
+    add_paragraph(doc, (
+        "Для навчальної платформи monorepo є оптимальним вибором: "
+        "студент отримує всю систему одним clone, спільні пакети "
+        "доступні без публікації в npm, а атомарні зміни забезпечують "
+        "консистентність між компонентами."
+    ))
+
+    add_paragraph(doc, (
+        "На ринку існує кілька інструментів для управління monorepo. "
+        "Порівняння найпопулярніших наведено у таблиці 1.3."
+    ))
+
+    table_tools = doc.add_table(rows=4, cols=5)
+    table_tools.style = "Table Grid"
+    headers_t = ["Інструмент", "Кешування", "Складність", "npm workspaces", "Розмір конфігурації"]
+    for i, h in enumerate(headers_t):
+        table_tools.rows[0].cells[i].text = h
+    data_t = [
+        ["Turborepo", "Так (локальне + remote)", "Низька", "Нативна", "1 файл (turbo.json)"],
+        ["Nx", "Так (розширене)", "Висока", "Через плагін", "nx.json + project.json"],
+        ["Lerna", "Ні (deprecated)", "Середня", "Так", "lerna.json"],
+    ]
+    for row_idx, row_data in enumerate(data_t, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_tools.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця 1.3 — Порівняння інструментів для monorepo")
+
+    add_paragraph(doc, (
+        "Turborepo обрано завдяки найнижчій складності конфігурації "
+        "(один файл turbo.json), нативній підтримці npm workspaces "
+        "та достатньому функціоналу для навчальної платформи."
+    ))
+
+    add_paragraph(doc, (
         "Turborepo — інструмент для управління monorepo від компанії Vercel, "
         "який забезпечує: інкрементальну збірку (перебудовує лише змінені "
         "пакети), кешування результатів збірки, паралельне виконання задач "
-        "та визначення порядку збірки на основі графу залежностей. Turborepo "
-        "обрано для даної платформи завдяки простоті конфігурації, швидкості "
-        "роботи та інтеграції з npm workspaces."
+        "та визначення порядку збірки на основі графу залежностей."
     ))
 
     # 1.4
@@ -1073,6 +1129,39 @@ def write_chapter2(doc):
     add_list_item(doc, "Sprint 4: + GET /api/priorities, оновлені ендпоінти з підтримкою пріоритетів.")
 
     add_paragraph(doc, (
+        "Повну таблицю API-ендпоінтів з розподілом по спринтах наведено "
+        "у таблиці 2.1."
+    ))
+
+    table_api = doc.add_table(rows=16, cols=5)
+    table_api.style = "Table Grid"
+    headers_api = ["Sprint", "Метод", "Шлях", "Опис", "Auth"]
+    for i, h in enumerate(headers_api):
+        table_api.rows[0].cells[i].text = h
+    data_api = [
+        ["1", "POST", "/auth/registration", "Реєстрація", "Ні"],
+        ["1", "POST", "/auth/login", "Вхід", "Ні"],
+        ["2", "GET", "/tasks", "Список задач", "Так"],
+        ["2", "GET", "/profile", "Профіль", "Так"],
+        ["2", "PUT", "/profile", "Оновити профіль", "Так"],
+        ["3", "POST", "/tasks", "Створити задачу", "Так"],
+        ["3", "GET", "/tasks/:id", "Задача по ID", "Так"],
+        ["3", "PUT", "/tasks/:id", "Оновити задачу", "Так"],
+        ["3", "PATCH", "/tasks/:id", "Часткове оновлення", "Так"],
+        ["3", "DELETE", "/tasks/:id", "Видалити задачу", "Так"],
+        ["3", "DELETE", "/tasks/:id/attachments/:fileId", "Видалити файл", "Так"],
+        ["3", "GET", "/tasks/all", "Всі задачі (пагінація)", "Так"],
+        ["4", "GET", "/priorities", "Список пріоритетів", "Так"],
+        ["4", "POST", "/tasks", "Створити з пріоритетом", "Так"],
+        ["4", "PUT", "/tasks/:id", "Оновити з пріоритетом", "Так"],
+    ]
+    for row_idx, row_data in enumerate(data_api, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_api.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця 2.1 — API-ендпоінти по спринтах")
+
+    add_paragraph(doc, (
         "Такий підхід дозволяє backend-студенту поступово реалізовувати "
         "API, а frontend/mobile-студенту — працювати з API відповідного "
         "рівня складності, не стикаючись з ендпоінтами, які ще не "
@@ -1198,7 +1287,8 @@ def write_chapter2(doc):
     add_paragraph(doc, (
         "Кожен тікет містить детальні сценарії (від 4 до 8), що описують "
         "очікувану поведінку для happy path, error handling та edge cases. "
-        "Повний приклад тікету наведено у Додатку В."
+        "Повний приклад тікету наведено у Додатку В. Повний список "
+        "тікетів для всіх напрямків наведено у Додатку Г."
     ))
 
     # 2.10
@@ -1443,6 +1533,64 @@ def write_chapter3(doc):
     ))
 
     add_paragraph(doc, (
+        "Таблицю маршрутів web-додатку наведено у таблиці 3.1."
+    ))
+
+    table_routes = doc.add_table(rows=9, cols=4)
+    table_routes.style = "Table Grid"
+    headers_r = ["Маршрут", "Сторінка", "Auth", "Sprint"]
+    for i, h in enumerate(headers_r):
+        table_routes.rows[0].cells[i].text = h
+    data_r = [
+        ["/sign-in", "SignInPage", "Guest only", "1+"],
+        ["/sign-up", "SignUpPage", "Guest only", "1+"],
+        ["/", "TasksPage", "Protected", "2+"],
+        ["/profile", "ProfilePage", "Protected", "2+"],
+        ["/common-tasks", "CommonTasksPage", "Protected", "3+"],
+        ["/tasks/:id", "TaskDetailsPage", "Protected", "3+"],
+        ["/tasks/new", "AddTaskPage", "Protected", "3+"],
+        ["/tasks/:id/edit", "EditTaskPage", "Protected", "3+"],
+    ]
+    for row_idx, row_data in enumerate(data_r, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_routes.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця 3.1 — Маршрути web-додатку")
+
+    add_paragraph(doc, (
+        "Доступність маршрутів залежить від спринту (Sprint Gating). "
+        "На Sprint 1 доступні лише сторінки авторизації та StubPage. "
+        "На Sprint 2 — TasksPage та ProfilePage. На Sprint 3+ — "
+        "повний набір маршрутів включаючи CRUD-операції з задачами."
+    ))
+
+    add_paragraph(doc, (
+        "Нижче наведено фрагмент коду маршрутизатора з захищеними "
+        "та гостьовими маршрутами:"
+    ))
+    add_code_block(doc, '''const AppRouter: React.FC = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route element={<GuestRoute />}>
+        <Route element={<AuthLayout />}>
+          <Route path="/sign-in" element={<SignInContainer />} />
+          <Route path="/sign-up" element={<SignUpContainer />} />
+        </Route>
+      </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<TasksContainer />} />
+          <Route path="/profile" element={<ProfileContainer />} />
+          <Route path="/tasks/:id" element={<TaskDetailsContainer />} />
+          <Route path="/tasks/new" element={<AddTaskContainer />} />
+          <Route path="/tasks/:id/edit" element={<EditTaskContainer />} />
+        </Route>
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);''')
+
+    add_paragraph(doc, (
         "Компоненти UI реалізовані з використанням CSS-модулів. "
         "Кожен компонент має окремий CSS-файл з відповідними стилями. "
         "Реалізовано компоненти: CustomButton (кнопка з варіантами), "
@@ -1453,7 +1601,11 @@ def write_chapter3(doc):
         "пріоритету), TaskStatus (статус задачі)."
     ))
 
-    add_paragraph(doc, "Діаграму потоків даних у web-додатку наведено на рис. 3.2.")
+    add_paragraph(doc, (
+        "Діаграму потоків даних у web-додатку наведено на рис. 3.2. "
+        "Додаткові фрагменти коду frontend-додатку (GuestRoute, "
+        "ProtectedRoute, DevMenu, Container) наведено у Додатку Д."
+    ))
     if os.path.exists("diagrams/output/data-flow.png"):
         add_image(doc, "diagrams/output/data-flow.png", width=Cm(6))
     add_image_caption(doc, "Рис. 3.2 — Потік даних у додатку")
@@ -2164,6 +2316,186 @@ export const registrationApi = async (
         "The user clicks the \"Sign In\" link. "
         "The user is redirected to the login page."
     ))
+
+    # ДОДАТОК Г
+    add_page_break(doc)
+    add_chapter_title(doc, "ДОДАТОК Г")
+    add_centered_paragraph(doc, "Повний список навчальних тікетів", bold=True)
+    add_paragraph(doc, "")
+
+    add_paragraph(doc, "Frontend-напрямок (27 тікетів):", bold=True)
+    add_paragraph(doc, "")
+
+    table_fe = doc.add_table(rows=28, cols=3)
+    table_fe.style = "Table Grid"
+    fe_headers = ["Sprint", "Epic", "Назва"]
+    for i, h in enumerate(fe_headers):
+        table_fe.rows[0].cells[i].text = h
+    fe_data = [
+        ["1", "Authorization", "Sign Up Page Markup"],
+        ["1", "Authorization", "Sign In Page Markup"],
+        ["1", "Authorization", "Sign Up Page Logic"],
+        ["1", "Authorization", "Sign In Page Logic"],
+        ["1", "Authorization", "Integrate UI with registration logic"],
+        ["1", "Authorization", "Integrate UI with login logic"],
+        ["2", "-", "Publish frontend app to production domain"],
+        ["2", "-", "Implement navigation structure in header bar"],
+        ["2", "Tasks", "My Tasks Page implementation"],
+        ["2", "Tasks", "Add Task Page implementation"],
+        ["2", "Tasks", "Implement task deletion feature"],
+        ["2", "Profile", "Profile Page display user data"],
+        ["2", "Profile", "Profile Page update user data"],
+        ["2", "Profile", "Profile Page logout flow"],
+        ["3", "-", "Set up development environment"],
+        ["3", "Tasks", "Done/In Progress logic for tasks"],
+        ["3", "Tasks", "Edit Task Page implementation"],
+        ["3", "Tasks", "Task Details Page implementation"],
+        ["3", "Tasks", "All Tasks Page implementation"],
+        ["4", "Redesign", "Update Sign In Page UI"],
+        ["4", "Redesign", "Update Sign Up Page UI"],
+        ["4", "Redesign", "Update Profile Page UI"],
+        ["4", "Redesign", "Update Task Details Page UI"],
+        ["4", "Task Priority", "Add priority select for Add Task"],
+        ["4", "Task Priority", "Add priority select for Edit Task"],
+        ["4", "Task Priority", "Display priority on My Tasks"],
+        ["4", "Task Priority", "Display priority on Task Details"],
+    ]
+    for row_idx, row_data in enumerate(fe_data, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_fe.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця Г.1 — Тікети Frontend-напрямку")
+
+    add_paragraph(doc, "")
+    add_paragraph(doc, "Backend-напрямок (31 тікет):", bold=True)
+    add_paragraph(doc, "")
+
+    table_be = doc.add_table(rows=18, cols=3)
+    table_be.style = "Table Grid"
+    for i, h in enumerate(fe_headers):
+        table_be.rows[0].cells[i].text = h
+    be_data = [
+        ["1", "Authorization", "Define Auth API contracts"],
+        ["1", "Authorization", "Provide Postman collection (Auth)"],
+        ["1", "Authorization", "Provide Sign Up API"],
+        ["1", "Authorization", "Provide Sign In API"],
+        ["2", "-", "Publish backend API to production"],
+        ["2", "Profile", "Define Profile API contracts"],
+        ["2", "Profile", "Provide Get Profile API"],
+        ["2", "Profile", "Provide Update Profile API"],
+        ["2", "Profile", "Provide Delete Avatar API"],
+        ["2", "Tasks", "Define My Tasks API contracts"],
+        ["2", "Tasks", "Provide Get My Tasks API"],
+        ["2", "Tasks", "Provide Create My Task API"],
+        ["2", "Tasks", "Provide Delete My Task API"],
+        ["3", "Tasks", "Provide Get All Tasks with pagination"],
+        ["3", "Tasks", "Provide Get My Task by Id API"],
+        ["3", "Tasks", "Provide Update My Task API"],
+        ["3", "Tasks", "Provide Delete attachment API"],
+    ]
+    for row_idx, row_data in enumerate(be_data, 1):
+        for col_idx, cell_data in enumerate(row_data):
+            table_be.rows[row_idx].cells[col_idx].text = cell_data
+
+    add_image_caption(doc, "Таблиця Г.2 — Тікети Backend-напрямку (фрагмент)")
+
+    # ДОДАТОК Д
+    add_page_break(doc)
+    add_chapter_title(doc, "ДОДАТОК Д")
+    add_centered_paragraph(doc, "Фрагменти коду frontend-додатку", bold=True)
+    add_paragraph(doc, "")
+
+    add_paragraph(doc, "GuestRoute — захист маршрутів від авторизованих:", bold=True)
+    add_code_block(doc, '''import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "@external-lab-monorepo/hooks";
+
+const GuestRoute: React.FC = () => {
+  const { accessToken } = useAuth();
+
+  if (accessToken) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export default GuestRoute;''')
+
+    add_paragraph(doc, "ProtectedRoute — захист маршрутів від неавторизованих:", bold=True)
+    add_code_block(doc, '''import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "@external-lab-monorepo/hooks";
+
+const ProtectedRoute: React.FC = () => {
+  const { accessToken } = useAuth();
+
+  if (!accessToken) {
+    return <Navigate to="/sign-in" replace />;
+  }
+
+  return <Outlet />;
+};
+
+export default ProtectedRoute;''')
+
+    add_paragraph(doc, "DevMenuContext — перемикання спринтів:", bold=True)
+    add_code_block(doc, '''import React, { createContext, useContext, useState } from "react";
+
+interface DevMenuContextType {
+  currentSprint: string;
+  setSprint: (sprint: string) => void;
+}
+
+const DevMenuContext = createContext<DevMenuContextType>({
+  currentSprint: "4",
+  setSprint: () => {},
+});
+
+export const DevMenuProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [currentSprint, setCurrentSprint] = useState("4");
+
+  return (
+    <DevMenuContext.Provider value={{ currentSprint, setSprint: setCurrentSprint }}>
+      {children}
+    </DevMenuContext.Provider>
+  );
+};
+
+export const useDevMenu = () => useContext(DevMenuContext);''')
+
+    add_paragraph(doc, "Приклад Container-компонента (TasksContainer):", bold=True)
+    add_code_block(doc, '''import React, { useEffect } from "react";
+import { useTasks } from "@external-lab-monorepo/hooks";
+import { useAuth } from "@external-lab-monorepo/hooks";
+import TasksPage from "./TasksPage";
+
+const TasksContainer: React.FC = () => {
+  const { tasks, loading, error, fetchTasks } = useTasks();
+  const { logout } = useAuth();
+
+  useEffect(() => {
+    fetchTasks(
+      undefined,
+      (err) => {
+        if (err?.response?.status === 401) {
+          logout();
+        }
+      }
+    );
+  }, []);
+
+  return (
+    <TasksPage
+      tasks={tasks}
+      loading={loading}
+      error={error}
+      onDeleteTask={deleteTask}
+    />
+  );
+};
+
+export default TasksContainer;''')
 
 
 # ============================================================
