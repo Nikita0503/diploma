@@ -199,6 +199,7 @@ def add_code_block(doc, code, language=""):
 
 def write_annotation(doc):
     """Write annotation in Ukrainian."""
+    add_page_break(doc)
     add_chapter_title(doc, "АНОТАЦІЯ")
     add_paragraph(doc, (
         "Бакалаврська кваліфікаційна робота на тему: «Розроблення навчальної "
